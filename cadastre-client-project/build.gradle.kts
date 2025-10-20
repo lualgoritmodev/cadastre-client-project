@@ -45,6 +45,8 @@ dependencies {
 	// Coroutines
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
 }
 
 kotlin {
