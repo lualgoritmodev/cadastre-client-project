@@ -1,7 +1,16 @@
 package com.garcia.luciano.cadastre_client_project.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import jakarta.persistence.*
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import jakarta.persistence.Id
+import jakarta.persistence.GenerationType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Column
+import jakarta.persistence.OneToOne
+import jakarta.persistence.CascadeType
+import jakarta.persistence.OneToMany
+import jakarta.persistence.JoinColumn
 import jakarta.validation.constraints.Email
 import java.time.LocalDate
 import java.util.UUID
