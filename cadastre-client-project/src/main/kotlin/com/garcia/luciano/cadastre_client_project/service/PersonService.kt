@@ -1,7 +1,12 @@
 package com.garcia.luciano.cadastre_client_project.service
 
-import org.springframework.stereotype.Service
+import com.garcia.luciano.cadastre_client_project.entity.Person
+import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePersonDTO
+import java.util.UUID
 
-@Service
-class PersonService {
+interface PersonService {
+    fun createPerson(person: Person): Person
+    fun getPersonById(idPerson: UUID): Person
+    fun getAllPerson(): List<Person>
+    fun updatePersonById(idPerson: UUID, person: UpdatePersonDTO): Person
 }

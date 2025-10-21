@@ -25,6 +25,7 @@ data class Person(
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     val dateOfBirth: LocalDate,
     val genere: String,
+    val phone: String,
     val cep: String,
     @Email
     @Column(unique = true, nullable = false)
