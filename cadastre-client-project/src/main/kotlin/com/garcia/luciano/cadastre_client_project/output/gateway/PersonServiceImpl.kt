@@ -11,7 +11,7 @@ import java.util.UUID
 @Service
 class PersonServiceImpl(
     val personRepository: PersonRepository,
-    val getViaCep: GetViaCepServiceImpl
+    val getViaCep: TGetViaCepServiceImpl
 ): PersonService {
     override suspend fun createPerson(person: Person): Person {
         val address = getViaCep.getAddress(person.cep, person, person.numberResidence)
