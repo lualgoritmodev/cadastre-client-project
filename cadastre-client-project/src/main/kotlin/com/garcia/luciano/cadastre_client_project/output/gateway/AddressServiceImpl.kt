@@ -3,24 +3,23 @@ package com.garcia.luciano.cadastre_client_project.output.gateway
 import com.garcia.luciano.cadastre_client_project.entity.Address
 import com.garcia.luciano.cadastre_client_project.repository.AddressRepository
 import com.garcia.luciano.cadastre_client_project.service.AddressService
+import kotlinx.coroutines.flow.toList
 import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
 class AddressServiceImpl(val addressRepository: AddressRepository): AddressService {
 
-    override fun createAddress(address: Address): Address = addressRepository.save(address)
-
-    override fun getAddressById(idAddress: UUID): Address = addressRepository.findById(idAddress).orElseThrow {
+    override suspend fun createAddress(address: Address): Address = addressRepository.save(address)
+    override suspend fun getAddressById(idAddress: UUID): Address = addressRepository.findById(idAddress)?: throw
             RuntimeException("Id $idAddress do endereço não encontrado")
-        }
 
-    override fun getAllAddress(): List<Address> = addressRepository.findAll()
+    override suspend fun getAllAddress(): List<Address> = addressRepository.findAll().toList()
 
-    override fun updateAddressById(idAddress: UUID, address: Address): Address {
-        val existingAddress  = addressRepository.findById(idAddress).orElseThrow {
+    override suspend fun updateAddressById(idAddress: UUID, address: Address): Address {
+        val existingAddress  = addressRepository.findById(idAddress)?: throw
             RuntimeException("Id $idAddress do endereço não encontrado")
-        }
+
         val updateAddress = existingAddress .copy(
             cep = address.cep,
             road = address.road

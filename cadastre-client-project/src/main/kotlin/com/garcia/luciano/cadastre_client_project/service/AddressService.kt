@@ -4,8 +4,8 @@ import com.garcia.luciano.cadastre_client_project.entity.Address
 import java.util.UUID
 
 interface AddressService {
-    fun createAddress(address: Address): Address
-    fun getAddressById(idAddress:UUID): Address
-    fun getAllAddress(): List<Address>
-    fun updateAddressById(idAddress: UUID, address: Address): Address
+    suspend fun createAddress(address: Address): Address
+    suspend fun getAddressById(idAddress:UUID): Address
+    suspend fun getAllAddress(): List<Address>
+    suspend fun updateAddressById(idAddress: UUID, address: Address): Address
 }

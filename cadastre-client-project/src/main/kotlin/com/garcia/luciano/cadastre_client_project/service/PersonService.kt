@@ -5,8 +5,8 @@ import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePerso
 import java.util.UUID
 
 interface PersonService {
-    fun createPerson(person: Person): Person
-    fun getPersonById(idPerson: UUID): Person
-    fun getAllPerson(): List<Person>
-    fun updatePersonById(idPerson: UUID, person: UpdatePersonDTO): Person
+    suspend fun createPerson(person: Person): Person
+    suspend fun getPersonById(idPerson: UUID): Person
+    suspend fun getAllPerson(): List<Person>
+    suspend fun updatePersonById(idPerson: UUID, person: UpdatePersonDTO): Person
 }

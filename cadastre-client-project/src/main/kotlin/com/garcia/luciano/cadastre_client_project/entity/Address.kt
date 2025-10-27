@@ -1,27 +1,25 @@
 package com.garcia.luciano.cadastre_client_project.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
-import jakarta.persistence.Id
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.FetchType
+import jakarta.validation.constraints.NotBlank
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
 import java.util.UUID
 
-@Entity
-@Table(name = "tabela_endereco")
+@Table(name = "tb_address")
 data class Address(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val idAddress: UUID? = null,
+    @field:NotBlank(message = "CEP obrigatório")
     val cep: String,
+    @field:NotBlank(message = "Rua e obrigatório")
     val neighborhood: String,
+    @field:NotBlank(message = "Rua é obrigatório")
     val road: String,
+    @field:NotBlank(message = "Cidade é obrigatório")
+    val city: String,
+    @field:NotBlank(message = "Não tem número sua casa?")
     val numberResidence: String,
-    val UF: Char,
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    val person: Person
+    val DDD: String,
+    val UF: String? = null,
+    val personId: UUID ? = null
 )

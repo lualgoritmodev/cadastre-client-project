@@ -9,5 +9,4 @@ class CadastreClientProjectApplication
 
 fun main(args: Array<String>) {
 	runApplication<CadastreClientProjectApplication>(*args)
-	println("Funcionou")
 }

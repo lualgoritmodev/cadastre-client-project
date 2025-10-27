@@ -1,14 +1,14 @@
 package com.garcia.luciano.cadastre_client_project.output.gateway.dto
 
 import com.garcia.luciano.cadastre_client_project.entity.Person
-import jakarta.persistence.Column
 import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 
 data class UpdatePersonDTO(
     val cep: String,
     val phone: String,
-    @Email
-    @Column(unique = true, nullable = false)
+    @field:Email(message = "E-mail inválido")
+    @field:NotBlank(message = "Não pode ser vazio")
     val email: String
 ) {
     fun toEntity(existingPerson: Person) = existingPerson.copy(

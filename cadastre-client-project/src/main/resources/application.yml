@@ -1,0 +1,55 @@
+server:
+   port: 8080
+   servlet:
+      context-path: /
+   name: cadastre-client-project
+
+spring:
+   r2dbc:
+      url: r2dbc:postgresql://localhost:5433/client
+      username: postgres
+      password: postgres
+
+logging:
+   level:
+      org.springframework.r2dbc: DEBUG
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+output:
+   ansi:
+      enabled: ALWAYS
+
+main:
+   web-application-type: servlet
+
+boot:
+   run:
+      jvmArguments: --add-opens=java.base/java.time=ALL-UNNAMED
+
+jwt:
+   secret: your-very-secure-and-long-secret-key
+
+viacep:
+   url: "https://viacep.com.br/ws/"
+
+flyway:
+   enabled: true
+   database-type: postgresql
+   locations: classpath:db/migration
+   ignore-unsupported: true
+
+#  http:
+#    encoding:
+#      charset: utf-8
+#      enabled: false
+
+#  kafka:
+#    bootstrap-servers: 127.0.0.1:9092
+#    consumer:
+#      topics:
+#        - client-create-topic
+#      group-id: client-service-group
+#      auto-offset: earliest
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-deserializer-org: org.apache.kafka.common.serialization.StringDeserializer

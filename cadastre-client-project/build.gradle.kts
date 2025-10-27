@@ -3,7 +3,6 @@ plugins {
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.5.6"
 	id("io.spring.dependency-management") version "1.1.7"
-	kotlin("plugin.jpa") version "1.9.25"
 }
 
 group = "com.garcia.luciano"
@@ -18,6 +17,8 @@ java {
 
 repositories {
 	mavenCentral()
+	google()
+	gradlePluginPortal()
 }
 
 dependencies {
@@ -27,9 +28,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-	// JPA (se for usar banco de dados)
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("com.h2database:h2")
 	// Testes
 	testImplementation("org.jetbrains.kotlin:kotlin-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -46,6 +44,22 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	//Jakarta
+	implementation("jakarta.ws.rs:jakarta.ws.rs-api:3.1.0")
+
+	//Jackson para o Clint
+	implementation("io.ktor:ktor-serialization-jackson:2.3.4")
+
+	//PostGreSQL
+	implementation("org.postgresql:postgresql:42.7.2")
+	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
+
+	implementation("org.springframework.boot:spring-boot-starter-webflux") // Inclui o WebClient
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")     // Para usar coroutines com WebFlux
+
+	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 
 }
 
