@@ -6,8 +6,9 @@ import com.garcia.luciano.cadastre_client_project.service.GetViaCepService
 import com.garcia.luciano.cadastre_client_project.service.dtoservice.AddressResponseDTO
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
-
+@Component
 class TGetViaCepServiceImpl(
     private val webClient: WebClient
 ): GetViaCepService {
@@ -24,7 +25,6 @@ class TGetViaCepServiceImpl(
             .bodyToMono(AddressResponseDTO::class.java)
             .awaitSingle()
     }
-
     suspend fun getAddress(
         cep: String,
         person: Person,

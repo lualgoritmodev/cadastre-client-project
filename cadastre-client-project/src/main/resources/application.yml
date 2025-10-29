@@ -5,10 +5,13 @@ server:
    name: cadastre-client-project
 
 spring:
-   r2dbc:
-      url: r2dbc:postgresql://localhost:5433/client
-      username: postgres
-      password: postgres
+  profiles:
+    active: dev
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/client
+    username: postgres
+    password: postgres
 
 logging:
    level:
