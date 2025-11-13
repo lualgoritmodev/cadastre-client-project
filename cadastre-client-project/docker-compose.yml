@@ -1,14 +1,13 @@
 version: '3.8'
-name: cadastreclient-api
+name: cadastre-client-api
 services:
-  r2dbc:
+  postgres:
     image: postgres:13
-    container_name: postgres-db-client
+    container_name: cadastre-client-postgres
     environment:
       POSTGRES_DB: client
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      SPRING_PROFILES_ACTIVE: hom
     ports:
       - "5433:5432"
 

@@ -2,12 +2,6 @@
 viacep:
   url: "https://viacep.com.br/ws/"
 
-spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5433/client
-    username: postgres
-    password: postgres
-
 logging:
   level:
     org.springframework.r2dbc: DEBUG

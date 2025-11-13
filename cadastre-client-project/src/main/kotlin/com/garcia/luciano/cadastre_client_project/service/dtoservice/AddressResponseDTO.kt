@@ -9,7 +9,7 @@ data class AddressResponseDTO(
     val bairro: String? = null,
     val localidade: String? = null,
     val uf: String? = null,
-    val numberResidence: String,
+    val numberResidence: String?=null,
     val ddd: String? = null
 ) {
     fun toEntity(person: Person) = Address(
@@ -17,7 +17,7 @@ data class AddressResponseDTO(
         neighborhood = this.bairro?: "",
         road = this.logradouro ?: "",
         city = this.localidade ?: "",
-        numberResidence = person.numberResidence,
+        numberResidence = person.numberResidence?:"",
         DDD = this.ddd ?:"",
         UF = this.uf ?: "",
     )

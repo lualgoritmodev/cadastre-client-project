@@ -17,64 +17,59 @@ java {
 
 repositories {
 	mavenCentral()
+	maven {
+		url = uri("https://company/com/maven2")
+	}
 	google()
 	gradlePluginPortal()
+	mavenLocal()
 }
 
 dependencies {
-	// Spring Boot
-	implementation("org.springframework.boot:spring-boot-starter")
+	// Spring Boot Starters
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.boot:spring-boot-starter-security") // já estava ok
+
+	// PostgreSQL Driver
+	implementation("org.postgresql:postgresql:42.6.0")
+
+	// Jackson para Kotlin
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
+	// Kafka
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("org.apache.kafka:kafka-clients")
+
+	// Desenvolvimento
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	// Testes
-	testImplementation("org.jetbrains.kotlin:kotlin-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	// Serialização JSON
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("org.mockito:mockito-core:5.3.0")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
+	testImplementation("org.springframework.security:spring-security-test:6.5.0")
+	testImplementation("org.testcontainers:junit-jupiter")
 
-	// Ktor Client Core
-	implementation("io.ktor:ktor-client-core:2.3.7")
-	implementation("io.ktor:ktor-client-cio:2.3.7")
-	implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
-	implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
+	implementation("org.glassfish.jersey.core:jersey-client:3.1.2")
+	implementation("org.glassfish.jersey.inject:jersey-hk2:3.1.2")
 
-	// Coroutines
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 
-	implementation("org.springframework.boot:spring-boot-starter-validation")
+	// OpenAPI
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
-	//Jakarta
-	implementation("jakarta.ws.rs:jakarta.ws.rs-api:3.1.0")
+	// Flyway
+	implementation("org.flywaydb:flyway-core")
 
-	//Jackson para o Clint
-	implementation("io.ktor:ktor-serialization-jackson:2.3.4")
-
-	//PostGreSQL
-	implementation("org.postgresql:postgresql:42.7.2")
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
-
-	implementation("org.springframework.boot:spring-boot-starter-webflux") // Inclui o WebClient
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")     // Para usar coroutines com WebFlux
-
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+	// JJWT - Versão nova e módulos necessários!
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
-	}
-}
-
-allOpen {
-	annotation("jakarta.persistence.Entity")
-	annotation("jakarta.persistence.MappedSuperclass")
-	annotation("jakarta.persistence.Embeddable")
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
-}

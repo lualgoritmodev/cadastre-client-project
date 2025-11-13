@@ -1,25 +1,39 @@
 package com.garcia.luciano.cadastre_client_project.entity
 
-import jakarta.validation.constraints.NotBlank
-import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Table
-import java.util.UUID
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import jakarta.persistence.*
+import org.hibernate.validator.constraints.UUID
+
+@Entity
 @Table(name = "tb_address")
+@JsonIgnoreProperties("person")
 data class Address(
     @Id
-    val idAddress: UUID? = null,
-    @field:NotBlank(message = "CEP obrigatório")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val idAddress: Long? = null,
     val cep: String,
-    @field:NotBlank(message = "Rua e obrigatório")
-    val neighborhood: String,
-    @field:NotBlank(message = "Rua é obrigatório")
+    val neighborhood : String,
     val road: String,
-    @field:NotBlank(message = "Cidade é obrigatório")
     val city: String,
-    @field:NotBlank(message = "Não tem número sua casa?")
-    val numberResidence: String,
+    val numberResidence: String?=null,
     val DDD: String,
     val UF: String? = null,
-    val personId: UUID ? = null
-)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personId")
+    @JsonIgnore
+    val person: UUID? = null,
+) {
+    constructor() : this(
+        idAddress = null,
+        cep = "",
+        neighborhood = "",
+        road = "",
+        city = "",
+        numberResidence = null,
+        DDD = "",
+        UF = null,
+        person = null
+    )
+}

@@ -1,11 +1,12 @@
 package com.garcia.luciano.cadastre_client_project.service
 
 import com.garcia.luciano.cadastre_client_project.entity.Address
-import java.util.UUID
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 interface AddressService {
-    suspend fun createAddress(address: Address): Address
-    suspend fun getAddressById(idAddress:UUID): Address
-    suspend fun getAllAddress(): List<Address>
-    suspend fun updateAddressById(idAddress: UUID, address: Address): Address
+    fun createAddress(address: Address): Mono<Address>
+    fun getAddressById(idAddress:Long): Mono<Address>
+    fun getAllAddress(): Flux<Address>
+    fun updateAddressById(idAddress: Long, address: Address): Mono<Address>
 }
