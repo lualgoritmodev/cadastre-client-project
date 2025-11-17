@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/api/v1/create-persons")
@@ -17,11 +16,10 @@ class CadastreClient(
     private val clientService: PersonService
 ) {
     @PostMapping("/person")
-    suspend fun createClient(@Valid @RequestBody personDTO: CreatePerson): Mono<ResponseEntity<CreatePerson>> {
-        return clientService.createPerson(personDTO)
-            .map {
-                ResponseEntity.status(HttpStatus.CREATED).body(CreatePerson.fromEntity(it))
-            }
+    fun createClient(@Valid @RequestBody personDTO: CreatePerson): ResponseEntity<CreatePerson> {
+        val person =  clientService.createPerson(personDTO)
+        return ResponseEntity.status(HttpStatus.CREATED).body(CreatePerson.fromEntity(person))
+
     }
 
 }

@@ -1,11 +1,12 @@
 package com.garcia.luciano.cadastre_client_project.config.client
 
+import jakarta.ws.rs.client.Client
+import jakarta.ws.rs.client.ClientBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class ClientConfig {
     @Bean
-    fun client():WebClient = WebClient.builder().build()
+    fun client(): Client = ClientBuilder.newClient()
 }

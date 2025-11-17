@@ -1,14 +1,17 @@
 package com.garcia.luciano.cadastre_client_project.input.controller.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.garcia.luciano.cadastre_client_project.entity.Address
 import com.garcia.luciano.cadastre_client_project.entity.Person
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.UUID
 
 data class CreatePerson(
-    val idPerson: Long?= null,
+    val idPerson: UUID?= null,
     val name: String,
     val cpf: String,
+    val RG: String,
     val cep: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     val dateOfBirth: LocalDate,
@@ -18,34 +21,37 @@ data class CreatePerson(
     val email: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     val registrationDate: LocalDateTime = LocalDateTime.now(),
-    val addressClient: MutableSet<CreateAddressDTO> = mutableSetOf()
+    val addressClient: MutableSet<Address> = mutableSetOf()
 ) {
     fun toEntity() = Person(
-        idPerson = this.idPerson,
         name = this.name,
+        cpf = this.cpf,
+        RG = this.RG,
         dateOfBirth = this.dateOfBirth,
         genere = this.genere,
-        cpf = this.cpf,
         cep = this.cep,
         phone = this.phone,
-        numberResidence = this.numberResidence?:"Não tem número?",
+        numberResidence = this.numberResidence ?: "Não tem número?",
         email = this.email,
-        registrationDate = this.registrationDate
+        registrationDate = this.registrationDate,
+        addressClient = this.addressClient
     )
 
     companion object {
         fun fromEntity(person: Person) = CreatePerson(
             name = person.name,
             cpf = person.cpf,
-            cep = person.cep,
-            numberResidence = person.numberResidence,
+            RG = person.RG,
             dateOfBirth = person.dateOfBirth,
-            phone = person.phone,
             genere = person.genere,
+            cep = person.cep,
+            phone = person.phone,
+            numberResidence = person.numberResidence,
             email = person.email,
+            registrationDate = person.registrationDate,
+            addressClient = mutableSetOf()
         )
     }
 
 }
-
 data class CreateAddressDTO(val cep: String, val numberResidence: String? = null)

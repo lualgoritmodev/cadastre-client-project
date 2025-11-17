@@ -17,7 +17,7 @@ data class AddressResponseDTO(
         neighborhood = this.bairro?: "",
         road = this.logradouro ?: "",
         city = this.localidade ?: "",
-        numberResidence = person.numberResidence?:"",
+        numberResidence = person.numberResidence,
         DDD = this.ddd ?:"",
         UF = this.uf ?: "",
     )

@@ -42,12 +42,12 @@ class TGetViaCepServiceImpl(
         return Address(
             cep = addressResponse.cep,
             neighborhood = addressResponse.bairro ?: "Bairro não informado",
-            road = addressResponse.logradouro ?: "Rua não informada",
+            road = addressResponse.logradouro,
             city = addressResponse.localidade ?: "Cidade não informada",
             numberResidence = numberResidence,
             DDD = "", // Preencha conforme necessário
             UF = addressResponse.uf ?: "UF não informada",
-            person = person?.idPerson
+            person = null
         )
     }
 }

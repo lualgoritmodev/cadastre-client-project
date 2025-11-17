@@ -4,12 +4,6 @@ import com.garcia.luciano.cadastre_client_project.entity.Address
 import com.garcia.luciano.cadastre_client_project.entity.Person
 import com.garcia.luciano.cadastre_client_project.service.GetViaCepService
 import com.garcia.luciano.cadastre_client_project.service.dtoservice.AddressResponseDTO
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
-import io.ktor.serialization.jackson.jackson
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 

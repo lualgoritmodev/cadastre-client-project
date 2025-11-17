@@ -4,7 +4,7 @@ package com.garcia.luciano.cadastre_client_project.entity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.*
-import org.hibernate.validator.constraints.UUID
+import java.util.UUID
 
 @Entity
 @Table(name = "tb_address")
@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.UUID
 data class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idAddress: Long? = null,
+    val idAddress: UUID? = null,
     val cep: String,
     val neighborhood : String,
     val road: String,
@@ -23,7 +23,7 @@ data class Address(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
     @JsonIgnore
-    val person: UUID? = null,
+    val person: Person? = null,
 ) {
     constructor() : this(
         idAddress = null,

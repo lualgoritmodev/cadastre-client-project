@@ -3,19 +3,18 @@ package com.garcia.luciano.cadastre_client_project.output.gateway
 import com.garcia.luciano.cadastre_client_project.entity.Person
 import com.garcia.luciano.cadastre_client_project.input.controller.dto.CreatePerson
 import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePersonDTO
-import com.garcia.luciano.cadastre_client_project.repository.AddressRepository
 import com.garcia.luciano.cadastre_client_project.repository.PersonRepository
 import com.garcia.luciano.cadastre_client_project.service.PersonService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 @Service
 class PersonServiceImpl(
     private val personRepository: PersonRepository,
-    private val addressRepository: AddressRepository,
     private val getViaCep: TGetViaCepServiceImpl
 ): PersonService {
-
+    @Transactional
     override fun createPerson(personDTO: CreatePerson): Person {
         val person = personRepository.save(personDTO.toEntity())
         val existingAddress = getViaCep.getAddress(
