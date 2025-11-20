@@ -8,12 +8,12 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 data class CreatePerson(
-    val idPerson: UUID?= null,
+    val idPerson: UUID?,
     val name: String,
     val cpf: String,
     val RG: String,
     val cep: String,
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     val dateOfBirth: LocalDate,
     val numberResidence: String? = null,
     val phone: String,
@@ -24,6 +24,7 @@ data class CreatePerson(
     val addressClient: MutableSet<Address> = mutableSetOf()
 ) {
     fun toEntity() = Person(
+        idPerson = this.idPerson,
         name = this.name,
         cpf = this.cpf,
         RG = this.RG,
@@ -38,19 +39,22 @@ data class CreatePerson(
     )
 
     companion object {
-        fun fromEntity(person: Person) = CreatePerson(
-            name = person.name,
-            cpf = person.cpf,
-            RG = person.RG,
-            dateOfBirth = person.dateOfBirth,
-            genere = person.genere,
-            cep = person.cep,
-            phone = person.phone,
-            numberResidence = person.numberResidence,
-            email = person.email,
-            registrationDate = person.registrationDate,
-            addressClient = mutableSetOf()
-        )
+        fun fromEntity(person: Person) = person.idPerson.let {
+            CreatePerson(
+                idPerson = it,
+                name = person.name,
+                cpf = person.cpf,
+                RG = person.RG,
+                dateOfBirth = person.dateOfBirth,
+                genere = person.genere,
+                cep = person.cep,
+                phone = person.phone,
+                numberResidence = person.numberResidence,
+                email = person.email,
+                registrationDate = person.registrationDate,
+                addressClient = mutableSetOf()
+            )
+        }
     }
 
 }

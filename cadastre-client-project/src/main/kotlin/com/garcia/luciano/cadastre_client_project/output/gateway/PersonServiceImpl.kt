@@ -5,8 +5,8 @@ import com.garcia.luciano.cadastre_client_project.input.controller.dto.CreatePer
 import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePersonDTO
 import com.garcia.luciano.cadastre_client_project.repository.PersonRepository
 import com.garcia.luciano.cadastre_client_project.service.PersonService
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 @Service
@@ -26,20 +26,15 @@ class PersonServiceImpl(
         return person
     }
     override fun getPersonById(idPerson: UUID): Person = personRepository.findById(idPerson)
-        .orElseThrow{ RuntimeException("Não existe o $idPerson")}
+        .orElseThrow{ RuntimeException("Não existe o person: $idPerson")}
     override fun getAllPerson(): List<Person> = personRepository.findAll()
     override fun updatePersonById(idPerson: UUID, person: UpdatePersonDTO): Person {
-        TODO("Not yet implemented")
-    }
+        val existingPerson = personRepository.findById(idPerson).orElseThrow {
+            RuntimeException("Este person não existe o person: $idPerson")
+        }
 
-//    override fun updatePersonById(idPerson: Long, person: UpdatePersonDTO): Mono<Person> {
-//        //TODO
-////        val existingPerson = personRepository.findById(idPerson)?: throw
-////                RuntimeException("Id $idPerson não encontrado")
-////
-////        val updatePerson = person.toEntity(existingPerson)
-////
-////        return personRepository.save(updatePerson)
-//    }
+            val personUpdate = person.toEntity(existingPerson)
+        return personRepository.save(personUpdate)
+    }
 
 }

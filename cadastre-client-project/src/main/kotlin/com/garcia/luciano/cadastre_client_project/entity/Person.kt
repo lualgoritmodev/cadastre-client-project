@@ -20,11 +20,12 @@ import java.util.UUID
 data class Person(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idPerson: UUID? = null,
+    val idPerson: UUID?,
     val name: String,
     @Column(unique = true, nullable = false)
     val cpf: String,
     val RG: String,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     val dateOfBirth: LocalDate,
     val genere: String,
     val phone: String,
