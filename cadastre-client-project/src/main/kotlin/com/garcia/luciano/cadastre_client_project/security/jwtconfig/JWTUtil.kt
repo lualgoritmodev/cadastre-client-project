@@ -1,4 +1,4 @@
-package com.garcia.luciano.cadastre_client_project.security
+package com.garcia.luciano.cadastre_client_project.security.jwtconfig
 
 import com.garcia.luciano.cadastre_client_project.output.gateway.PersonServiceImpl
 import io.jsonwebtoken.Jwts

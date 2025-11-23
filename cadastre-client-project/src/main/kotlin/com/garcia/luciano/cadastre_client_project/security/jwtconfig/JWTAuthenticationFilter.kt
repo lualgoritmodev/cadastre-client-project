@@ -1,4 +1,4 @@
-package com.garcia.luciano.cadastre_client_project.security
+package com.garcia.luciano.cadastre_client_project.security.jwtconfig
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -54,7 +54,6 @@ class JWTAuthenticationFilter(private val jwtUtil: JWTUtil): OncePerRequestFilte
             response.writer.flush()
         }
     }
-
     private fun getTokenDetail(token: String?): String? {
         return if(token != null && token.startsWith("Bearer")) {
             token.substring(7)

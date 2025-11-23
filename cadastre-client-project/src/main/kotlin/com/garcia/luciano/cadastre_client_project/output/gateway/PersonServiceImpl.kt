@@ -4,7 +4,7 @@ import com.garcia.luciano.cadastre_client_project.entity.Person
 import com.garcia.luciano.cadastre_client_project.input.controller.dto.CreatePerson
 import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePersonDTO
 import com.garcia.luciano.cadastre_client_project.repository.PersonRepository
-import com.garcia.luciano.cadastre_client_project.security.UserDetail
+import com.garcia.luciano.cadastre_client_project.security.jwtconfig.UserDetail
 import com.garcia.luciano.cadastre_client_project.service.PersonService
 import jakarta.transaction.Transactional
 import org.springframework.security.core.userdetails.UserDetails

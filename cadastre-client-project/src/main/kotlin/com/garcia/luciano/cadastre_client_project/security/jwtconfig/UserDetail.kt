@@ -1,4 +1,4 @@
-package com.garcia.luciano.cadastre_client_project.security
+package com.garcia.luciano.cadastre_client_project.security.jwtconfig
 
 import com.garcia.luciano.cadastre_client_project.entity.Person
 import org.springframework.security.core.GrantedAuthority
