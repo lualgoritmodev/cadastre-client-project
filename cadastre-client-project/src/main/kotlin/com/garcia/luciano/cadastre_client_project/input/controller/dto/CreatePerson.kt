@@ -1,7 +1,6 @@
 package com.garcia.luciano.cadastre_client_project.input.controller.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.garcia.luciano.cadastre_client_project.entity.Address
 import com.garcia.luciano.cadastre_client_project.entity.Person
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -21,7 +20,6 @@ data class CreatePerson(
     val email: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     val registrationDate: LocalDateTime = LocalDateTime.now(),
-    val addressClient: MutableSet<Address> = mutableSetOf()
 ) {
     fun toEntity() = Person(
         idPerson = this.idPerson,
@@ -35,13 +33,13 @@ data class CreatePerson(
         numberResidence = this.numberResidence ?: "Não tem número?",
         email = this.email,
         registrationDate = this.registrationDate,
-        addressClient = this.addressClient
+        addressClient = mutableSetOf()
     )
 
     companion object {
-        fun fromEntity(person: Person) = person.idPerson.let {
+        fun fromEntity(person: Person) =
             CreatePerson(
-                idPerson = it,
+                idPerson = person.idPerson,
                 name = person.name,
                 cpf = person.cpf,
                 RG = person.RG,
@@ -51,11 +49,9 @@ data class CreatePerson(
                 phone = person.phone,
                 numberResidence = person.numberResidence,
                 email = person.email,
-                registrationDate = person.registrationDate,
-                addressClient = mutableSetOf()
+                registrationDate = person.registrationDate
             )
         }
     }
 
-}
 data class CreateAddressDTO(val cep: String, val numberResidence: String? = null)

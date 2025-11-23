@@ -39,8 +39,8 @@ spring:
     locations: classpath:db/migration
     # ignore-unsupported: true # Use só se necessário
 
-#jwt:
-#  secret: your-very-secure-and-long-secret-key
+  jwt:
+    secret: your-very-secure-and-long-secret-key
 
 viacep:
   url: "https://viacep.com.br/ws/"

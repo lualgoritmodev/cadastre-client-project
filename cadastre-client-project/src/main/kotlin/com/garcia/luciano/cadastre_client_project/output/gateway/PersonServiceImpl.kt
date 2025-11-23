@@ -4,8 +4,11 @@ import com.garcia.luciano.cadastre_client_project.entity.Person
 import com.garcia.luciano.cadastre_client_project.input.controller.dto.CreatePerson
 import com.garcia.luciano.cadastre_client_project.output.gateway.dto.UpdatePersonDTO
 import com.garcia.luciano.cadastre_client_project.repository.PersonRepository
+import com.garcia.luciano.cadastre_client_project.security.UserDetail
 import com.garcia.luciano.cadastre_client_project.service.PersonService
 import jakarta.transaction.Transactional
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 import java.util.UUID
 
@@ -13,7 +16,13 @@ import java.util.UUID
 class PersonServiceImpl(
     private val personRepository: PersonRepository,
     private val getViaCep: TGetViaCepServiceImpl
-): PersonService {
+): UserDetailsService, PersonService {
+
+    override fun loadUserByUsername(email: String?): UserDetails {
+        val userDetail = personRepository.findByEmail(email)?:
+        throw RuntimeException("O email não foi encontrado $email")
+        return UserDetail(userDetail)
+    }
     @Transactional
     override fun createPerson(personDTO: CreatePerson): Person {
         val person = personRepository.save(personDTO.toEntity())
