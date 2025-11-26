@@ -1,5 +1,6 @@
 package com.garcia.luciano.cadastre_client_project.entity
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -8,7 +9,9 @@ import java.util.*
 
 data class Role(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: UUID?= null,
+    @JsonProperty("id_role")
+    val idRole: UUID?= null,
+    @JsonProperty("role_name")
     val name: String
 ): GrantedAuthority {
     override fun getAuthority(): String = name

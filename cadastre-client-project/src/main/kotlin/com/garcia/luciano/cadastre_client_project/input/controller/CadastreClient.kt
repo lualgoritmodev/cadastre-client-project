@@ -2,9 +2,12 @@ package com.garcia.luciano.cadastre_client_project.input.controller
 
 import com.garcia.luciano.cadastre_client_project.input.controller.dto.CreatePerson
 import com.garcia.luciano.cadastre_client_project.service.PersonService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -17,6 +20,11 @@ import java.util.UUID
 class CadastreClient(
     private val clientService: PersonService
 ) {
+    @Operation(
+        summary = "Criar pessoa (APENAS ADMIN)",
+        security = [SecurityRequirement(name ="bearerAuth")]
+    )
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/person")
     fun createClient(@Valid @RequestBody personDTO: CreatePerson): ResponseEntity<CreatePerson> {
         val person =  clientService.createPerson(personDTO)
