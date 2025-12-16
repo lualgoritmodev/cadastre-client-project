@@ -23,7 +23,7 @@ data class Address(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
     @JsonIgnore
-    val person: Person? = null,
+    val person: Person? = null
 ) {
     constructor() : this(
         idAddress = null,
