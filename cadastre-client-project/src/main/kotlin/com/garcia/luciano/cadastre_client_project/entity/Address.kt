@@ -18,8 +18,9 @@ data class Address(
     val road: String,
     val city: String,
     val numberResidence: String?=null,
-    val DDD: String,
-    val UF: String? = null,
+    val ddd: String?,
+    val uf: String? = null,
+    val complement: String ?= null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
     @JsonIgnore
@@ -32,8 +33,8 @@ data class Address(
         road = "",
         city = "",
         numberResidence = null,
-        DDD = "",
-        UF = null,
+        ddd = "",
+        uf = null,
         person = null
     )
 }

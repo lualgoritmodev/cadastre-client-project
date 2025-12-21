@@ -5,8 +5,9 @@ import com.garcia.luciano.cadastre_client_project.input.controller.dto.CepAddres
 import java.util.*
 
 interface AddressService {
-    fun createAddress(idPerson: UUID, cepAddress: CepAddress, address: Address): Address
+    fun createAddress(idPerson: UUID, cepAddress: CepAddress): Address
     fun getAddressById(idAddress:UUID): Address
     fun getAllAddress(): List<Address>
     fun updateAddressById(idAddress: UUID, address: Address): Address
+    fun updateAddressByIdPerson(idPerson: UUID, idAddress: UUID, address: Address): Address
 }

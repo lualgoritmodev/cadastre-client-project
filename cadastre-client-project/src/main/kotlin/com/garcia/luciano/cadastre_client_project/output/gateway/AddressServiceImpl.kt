@@ -15,12 +15,12 @@ class AddressServiceImpl(
     val personService: PersonService,
     val viaCepServiceImpl: TGetViaCepServiceImpl): AddressService {
 
-    override fun createAddress(idPerson: UUID, cepAddress: CepAddress, address: Address): Address {
+    override fun createAddress(idPerson: UUID, cepAddress: CepAddress): Address {
         val person = idPerson?.let { personService.getPersonById(it) }
         val newAddress = viaCepServiceImpl.getAddress(cepAddress.cep, person, cepAddress.numberResidence)
 
         person?.addressClient?.let { address ->
-           if(address.any { it.cep == newAddress.cep }) {
+           if(address.any { it.cep == newAddress.cep && it.numberResidence == newAddress.numberResidence}) {
                throw RuntimeException("Este endereço já existe: $cepAddress")
            }
         }
@@ -45,6 +45,26 @@ class AddressServiceImpl(
             numberResidence = address.numberResidence
         )
         return addressRepository.save(updateAddress)
+    }
+
+    override fun updateAddressByIdPerson(idPerson: UUID, idAddress: UUID, address: Address): Address {
+        val existingPerson = personService.getPersonById(idPerson)
+
+        val existingAddress = addressRepository.findById(idAddress).orElseThrow {
+            throw RuntimeException("Not Found idAddress $idAddress")
+        }
+
+        val updateAddress = address.copy(
+            numberResidence = existingAddress.numberResidence,
+            road = existingAddress.road
+        )
+
+        addressRepository.save(updateAddress)
+
+        existingPerson.addressClient.removeIf{ it.idAddress == idAddress }
+        existingPerson.addressClient.add(updateAddress)
+
+        return existingAddress
     }
 
 }

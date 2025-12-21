@@ -22,7 +22,7 @@ data class CreatePerson(
     val registrationDate: LocalDateTime = LocalDateTime.now(),
 ) {
     fun toEntity() = Person(
-        idPerson = this.idPerson,
+        idClient = this.idPerson,
         name = this.name,
         cpf = this.cpf,
         RG = this.RG,
@@ -39,7 +39,7 @@ data class CreatePerson(
     companion object {
         fun fromEntity(person: Person) =
             CreatePerson(
-                idPerson = person.idPerson,
+                idPerson = person.idClient,
                 name = person.name,
                 cpf = person.cpf,
                 RG = person.RG,

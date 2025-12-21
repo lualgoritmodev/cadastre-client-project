@@ -2,7 +2,6 @@ package com.garcia.luciano.cadastre_client_project.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
@@ -15,7 +14,7 @@ import java.util.UUID
 data class Person(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idPerson: UUID?,
+    val idClient: UUID?,
     val name: String,
     @Column(unique = true, nullable = false)
     val cpf: String,

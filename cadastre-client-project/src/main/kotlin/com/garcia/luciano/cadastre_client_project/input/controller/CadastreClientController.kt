@@ -14,7 +14,7 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/api/v1/persons")
-class CadastreClient(
+class CadastreClientController(
     private val personService: PersonService
 ) {
     @Operation(
